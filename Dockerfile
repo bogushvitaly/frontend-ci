@@ -9,7 +9,7 @@ RUN echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repo
     && phantomjs --version \
     && rm -rf /var/lib/apk/lists/* /var/cache/apk/* /usr/share/man /tmp/* /root/.cache
 
-RUN npm config set unsafe-perm=true && npm install --global node-gyp node-sass @angular/cli puppeteer lighthouse-ci codeceptjs allure-commandline firebase-tools
+RUN npm config set unsafe-perm=true && npm install --global pnpm node-gyp node-sass @angular/cli puppeteer lighthouse-ci codeceptjs allure-commandline firebase-tools
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true CHROME_BIN=/usr/bin/chromium-browser CHROME_PATH=/usr/bin/chromium-browser CHROMIUM_FLAGS="--headless --no-sandbox"
 
