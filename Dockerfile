@@ -6,7 +6,7 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
     chromium@edge \
     harfbuzz@edge \
     nss@edge \
-    build-base curl \
+    build-base curl git \
     openjdk8-jre-base \
     && mkdir -p /usr/share \
     && cd /usr/share \
