@@ -24,6 +24,14 @@ ENV CHROME_BIN=/usr/bin/chromium-browser \
     CHROME_PATH=/usr/lib/chromium/ \
     CHROMIUM_FLAGS="--headless --no-sandbox"
 
-RUN npm config set unsafe-perm true && npm install --global node-gyp pnpm codeceptjs puppeteer lighthouse-ci allure-commandline
+RUN npm config set unsafe-perm true && npm install --global node-gyp \
+    pnpm \ 
+    codeceptjs \ 
+    puppeteer \ 
+    lighthouse-ci \ 
+    allure-commandline \ 
+    artillery \ 
+    artillery-plugin-expect \ 
+    artillery-plugin-publish-metrics
 
 CMD ["/bin/bash"]
