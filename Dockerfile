@@ -1,14 +1,29 @@
 FROM node:alpine
 
-RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
-    && echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
-    && apk --no-cache update && apk upgrade && apk add --update --no-cache \
+LABEL description "CI"
+LABEL version="1.0.0"
+
+RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories 
+
+ENV CHROME_BIN=/usr/bin/chromium-browser
+ENV CHROME_PATH=/usr/lib/chromium/
+ENV CHROMIUM_FLAGS="--headless --no-sandbox"
+ENV LIGHTHOUSE_CHROMIUM_PATH=/usr/bin/chromium-browser
+
+RUN apk -U --no-cache update \ 
+    && apk --no-cache upgrade
+
+RUN apk -U --no-cache add \ 
     chromium@edge \
+    chromium-chromedriver@edge \
     harfbuzz@edge \
     nss@edge \
     build-base \
-    curl \
+    bash \
+    grep \
     git \
+    curl \
     python \
     openjdk8-jre-base \
     && mkdir -p /usr/share \
@@ -18,20 +33,19 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
     && phantomjs --version \
     && rm -rf /var/lib/apk/lists/* /var/cache/apk/* /usr/share/man /tmp/* /root/.cache
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-
-ENV CHROME_BIN=/usr/bin/chromium-browser \
-    CHROME_PATH=/usr/lib/chromium/ \
-    CHROMIUM_FLAGS="--headless --no-sandbox"
-
-RUN npm config set unsafe-perm true && npm install --global node-gyp \
+RUN npm config set unsafe-perm true && npm install --global \
+    node-gyp \
     pnpm \ 
+    firebase-tools \ 
     codeceptjs \ 
     puppeteer \ 
-    lighthouse-ci \ 
-    allure-commandline \ 
+    lighthouse \ 
+    lighthouse-ci \
     artillery \ 
     artillery-plugin-expect \ 
-    artillery-plugin-publish-metrics
+    artillery-plugin-publish-metrics \
+    allure-commandline
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 CMD ["/bin/bash"]
