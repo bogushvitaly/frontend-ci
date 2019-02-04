@@ -39,6 +39,7 @@ RUN npm config set unsafe-perm true && npm install --global \
     firebase-tools \ 
     codeceptjs \ 
     puppeteer \ 
+    pwmetrics \
     lighthouse \ 
     lighthouse-ci \
     artillery \ 
