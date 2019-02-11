@@ -47,6 +47,12 @@ RUN npm config set unsafe-perm true && npm install --global \
     artillery-plugin-publish-metrics \
     allure-commandline
 
+RUN git clone https://github.com/juj/emsdk.git \
+    && cd emsdk \
+    && ./emsdk install latest \
+    && ./emsdk activate latest \
+    && source ./emsdk_env.sh; sync
+
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 CMD ["/bin/bash"]
