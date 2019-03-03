@@ -21,8 +21,8 @@ RUN apk -U --no-cache add \
     nss@edge \
     build-base \
     bash \
-    grep \
     git \
+    grep \
     curl \
     python \
     openjdk8-jre-base \
@@ -35,7 +35,7 @@ RUN apk -U --no-cache add \
 
 RUN npm config set unsafe-perm true && npm install --global \
     node-gyp \
-    pnpm \ 
+    pnpm \
     firebase-tools \ 
     codeceptjs \ 
     puppeteer \ 
@@ -47,12 +47,7 @@ RUN npm config set unsafe-perm true && npm install --global \
     artillery-plugin-publish-metrics \
     allure-commandline
 
-RUN git clone https://github.com/juj/emsdk.git \
-    && cd emsdk \
-    && ./emsdk install latest \
-    && ./emsdk activate latest \
-    && source ./emsdk_env.sh; sync
-
+ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 CMD ["/bin/bash"]
