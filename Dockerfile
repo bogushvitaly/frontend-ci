@@ -17,6 +17,8 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
   /usr/share/man \
   /tmp/*
 
+RUN npm install -g firebase-tools 
+
 ENV CHROME_BIN=/usr/bin/chromium-browser \
   CHROME_PATH=/usr/lib/chromium/ \
   CHROMIUM_FLAGS="--headless --no-sandbox" \
